@@ -1,12 +1,13 @@
 package ca.mcmaster.se2aa4.island.teamXXX;
 
 import java.io.StringReader;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import eu.ace_design.island.bot.IExplorerRaid;
 import org.json.JSONObject;
 import org.json.JSONTokener; 
+
+import eu.ace_design.island.bot.IExplorerRaid; 
 
 public class Explorer implements IExplorerRaid {
 
@@ -14,13 +15,14 @@ public class Explorer implements IExplorerRaid {
     private Integer batteryLevel; 
     private boolean lastActionWasFly = false;  // Tracks if last action was "fly"
     private int stepsMoved = 0;  // Counts steps before turning
+    private String direction;
 
     @Override
     public void initialize(String s) {
         logger.info("** Initializing the Exploration Command Center");
         JSONObject info = new JSONObject(new JSONTokener(new StringReader(s)));
         logger.info("** Initialization info:\n {}",info.toString(2));
-        String direction = info.getString("heading");
+        direction = info.getString("heading");
         batteryLevel = info.getInt("budget");
         logger.info("The drone is facing {}", direction);
         logger.info("Battery level is {}", batteryLevel);
@@ -29,6 +31,7 @@ public class Explorer implements IExplorerRaid {
     @Override
     public String takeDecision() {
         JSONObject decision = new JSONObject();
+        JSONObject dir = new JSONObject();
         //decision.put("action", "fly"); // we stop the exploration immediately
          if (batteryLevel < 100) {
             decision.put("action", "stop");
@@ -38,8 +41,17 @@ public class Explorer implements IExplorerRaid {
         } else {
             if (stepsMoved >= 5) {  // Turn every 5 steps
                 decision.put("action", "heading");
-                decision.put("parameters", "SOUTH");  // Change direction (Example: Turn SOUTH)
+                if ("SOUTH".equals(direction) || "S".equals(direction)) {
+                    dir.put("direction", "E");
+                } 
+                else{
+                    logger.info(direction);
+                    dir.put("direction", "S");
+                }
+                decision.put("parameters", dir);  // Change direction (Example: Turn SOUTH)
+                direction = dir.getString("direction");
                 stepsMoved = 0;
+                lastActionWasFly = true;
             } else {
                 decision.put("action", "fly");
                 stepsMoved++;
