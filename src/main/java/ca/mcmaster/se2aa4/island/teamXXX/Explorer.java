@@ -55,7 +55,6 @@ public class Explorer implements IExplorerRaid {
             } else {
                 decision.put("action", "fly");
                 stepsMoved++;
-                lastActionWasFly = true;
             }
         }
 
