@@ -15,6 +15,11 @@ public class Explorer implements IExplorerRaid {
     private Integer batteryLevel; 
     private boolean lastActionWasFly = false;  // Tracks if last action was "fly"
     private int stepsMoved = 0;  // Counts steps before turning
+    private boolean stepTaken = false;
+    private boolean started = false;
+    private boolean scanned = false;
+    private boolean shouldTurn = true;
+    private int directionIndex = 2;
 
     @Override
     public void initialize(String s) {
@@ -30,23 +35,55 @@ public class Explorer implements IExplorerRaid {
     @Override
     public String takeDecision() {
         JSONObject decision = new JSONObject();
-        //decision.put("action", "fly"); // we stop the exploration immediately
-         if (batteryLevel < 100) {
-            decision.put("action", "stop");
-        } else if (lastActionWasFly) {
+
+        if (!this.started) {
+            JSONObject direction = new JSONObject();
+
+
+            direction.put("direction", "S");
+            decision.put("action", "heading");
+            decision.put("parameters", direction);
+            decision.put("action", "fly");    
             decision.put("action", "scan");
-            lastActionWasFly = false;
-        } else {
-            if (stepsMoved >= 5) {  // Turn every 5 steps
-                decision.put("action", "heading");
-                decision.put("parameters", "SOUTH");  // Change direction (Example: Turn SOUTH)
-                stepsMoved = 0;
-            } else {
-                decision.put("action", "fly");
-                stepsMoved++;
-                lastActionWasFly = true;
+            this.started = true;
+        } 
+
+        else {
+            //decision.put("action", "fly"); // we stop the exploration immediately
+            if (this.batteryLevel < 100) {
+                decision.put("action", "stop");
+            } else if (this.lastActionWasFly) {
+                JSONObject direction = new JSONObject();
+                decision.put("action", "scan");
+                this.scanned = true;
+
+                // decision.put("parameters", "direction");
+                // decision.put("direction", "S");
+            
+                this.lastActionWasFly = false;
+            }
+            // } else if (this.scanned) {
+            //     JSONObject direction = new JSONObject();
+            //     direction.put("direction", "S");
+            //     decision.put("action", "heading");
+            //     decision.put("parameters", direction);
+            //     this.scanned = false;
+            // } 
+            else {
+                if (this.stepsMoved >= 20) {  // Turn every 5 steps
+                    decision.put("action", "heading");
+                    // decision.put("action", "SOUTH");  // Change direction (Example: Turn SOUTH)
+                    this.stepsMoved = 0;
+                    this.scanned = true;
+                } else {
+                    decision.put("action", "fly");
+                    this.stepsMoved++;
+                    this.lastActionWasFly = true;
+                }
             }
         }
+
+
 
         logger.info("** Decision: {}",decision.toString());
         return decision.toString();
