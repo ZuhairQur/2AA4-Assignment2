@@ -18,6 +18,12 @@ public class Explorer implements IExplorerRaid {
     private String direction;
     private Drone drone = new Drone();
 
+    /**
+     * Initializes the Exploration Command Center with the given information.
+     *
+     * @param s Initialization information, including the heading the drone is
+     *           facing and the available battery budget.
+     */
     @Override
     public void initialize(String s) {
         logger.info("** Initializing the Exploration Command Center");
@@ -29,58 +35,16 @@ public class Explorer implements IExplorerRaid {
         logger.info("Battery level is {}", batteryLevel);
     }
 
+    /**
+     * Makes a decision based on the current state of the drone. The decision
+     * will be one of "fly", "heading", or "scan", and will be influenced by the
+     * drone's current battery level and the result of the last action taken.
+     *
+     * @return A JSONObject containing the decision to send to the drone.
+     */
     @Override
     public String takeDecision() {
         JSONObject decision = drone.makeDecision(batteryLevel);
-        // JSONObject dir = new JSONObject();
-        // //decision.put("action", "fly"); // we stop the exploration immediately
-        //  if (batteryLevel < 100) {
-        //     decision.put("action", "stop");
-        // } else if (lastActionWasFly) {
-        //     decision.put("action", "scan");
-        //     lastActionWasFly = false;
-        // } else {
-        //     lastActionWasFly = true;
-        //     stepsMoved++;
-        //     if (stepsMoved >= 40) {  // Turn every 5 steps
-        //         decision.put("action", "heading");
-        //         if ("SOUTH".equals(direction) || "S".equals(direction)) {
-        //             dir.put("direction", "E");
-        //         } 
-        //         else{
-        //             dir.put("direction", "S");
-        //         }
-        //         decision.put("parameters", dir);  // Change direction (Example: Turn SOUTH)
-        //         direction = dir.getString("direction");
-        //         stepsMoved = 0;
-        //         lastActionWasFly = true;
-        //     } else {
-        //         decision.put("action", "fly");
-        //     }
-        // }
-        
-        
-        // } else {
-        //     if (stepsMoved >= 5) {  // Turn every 5 steps
-        //         decision.put("action", "heading");
-        //         if ("SOUTH".equals(direction) || "S".equals(direction)) {
-        //             dir.put("direction", "E");
-        //         } 
-        //         else{
-        //             logger.info(direction);
-        //             dir.put("direction", "S");
-        //         }
-        //         decision.put("parameters", dir);  // Change direction (Example: Turn SOUTH)
-        //         direction = dir.getString("direction");
-        //         stepsMoved = 0;
-        //         lastActionWasFly = true;
-        //     } else {
-        //         decision.put("action", "fly");
-        //         stepsMoved++;
-        //     }
-
-
-
         logger.info("** Decision: {}",decision.toString());
         return decision.toString();
     }
