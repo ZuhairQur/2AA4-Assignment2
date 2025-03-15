@@ -16,6 +16,7 @@ public class Explorer implements IExplorerRaid {
     private boolean lastActionWasFly = false;  // Tracks if last action was "fly"
     private int stepsMoved = 0;  // Counts steps before turning
     private String direction;
+    private Drone drone = new Drone();
 
     @Override
     public void initialize(String s) {
@@ -30,33 +31,53 @@ public class Explorer implements IExplorerRaid {
 
     @Override
     public String takeDecision() {
-        JSONObject decision = new JSONObject();
-        JSONObject dir = new JSONObject();
-        //decision.put("action", "fly"); // we stop the exploration immediately
-         if (batteryLevel < 100) {
-            decision.put("action", "stop");
-        } else if (lastActionWasFly) {
-            decision.put("action", "scan");
-            lastActionWasFly = false;
-        } else {
-            if (stepsMoved >= 5) {  // Turn every 5 steps
-                decision.put("action", "heading");
-                if ("SOUTH".equals(direction) || "S".equals(direction)) {
-                    dir.put("direction", "E");
-                } 
-                else{
-                    logger.info(direction);
-                    dir.put("direction", "S");
-                }
-                decision.put("parameters", dir);  // Change direction (Example: Turn SOUTH)
-                direction = dir.getString("direction");
-                stepsMoved = 0;
-                lastActionWasFly = true;
-            } else {
-                decision.put("action", "fly");
-                stepsMoved++;
-            }
-        }
+        JSONObject decision = drone.makeDecision(batteryLevel);
+        // JSONObject dir = new JSONObject();
+        // //decision.put("action", "fly"); // we stop the exploration immediately
+        //  if (batteryLevel < 100) {
+        //     decision.put("action", "stop");
+        // } else if (lastActionWasFly) {
+        //     decision.put("action", "scan");
+        //     lastActionWasFly = false;
+        // } else {
+        //     lastActionWasFly = true;
+        //     stepsMoved++;
+        //     if (stepsMoved >= 40) {  // Turn every 5 steps
+        //         decision.put("action", "heading");
+        //         if ("SOUTH".equals(direction) || "S".equals(direction)) {
+        //             dir.put("direction", "E");
+        //         } 
+        //         else{
+        //             dir.put("direction", "S");
+        //         }
+        //         decision.put("parameters", dir);  // Change direction (Example: Turn SOUTH)
+        //         direction = dir.getString("direction");
+        //         stepsMoved = 0;
+        //         lastActionWasFly = true;
+        //     } else {
+        //         decision.put("action", "fly");
+        //     }
+        // }
+        
+        
+        // } else {
+        //     if (stepsMoved >= 5) {  // Turn every 5 steps
+        //         decision.put("action", "heading");
+        //         if ("SOUTH".equals(direction) || "S".equals(direction)) {
+        //             dir.put("direction", "E");
+        //         } 
+        //         else{
+        //             logger.info(direction);
+        //             dir.put("direction", "S");
+        //         }
+        //         decision.put("parameters", dir);  // Change direction (Example: Turn SOUTH)
+        //         direction = dir.getString("direction");
+        //         stepsMoved = 0;
+        //         lastActionWasFly = true;
+        //     } else {
+        //         decision.put("action", "fly");
+        //         stepsMoved++;
+        //     }
 
 
 
