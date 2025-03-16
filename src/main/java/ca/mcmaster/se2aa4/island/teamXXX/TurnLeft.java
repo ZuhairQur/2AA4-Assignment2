@@ -14,21 +14,21 @@ public class TurnLeft extends Turn {
      */
     @Override
     public JSONObject execute(Drone drone) {
-        char currentDirection = drone.getDirection();
+        Direction currentDirection = drone.getDirection();
         JSONObject dir = new JSONObject();
 
-        if (currentDirection == 'E') {
+        if (currentDirection == Direction.E) {
             dir = super.turnNorth();
-            drone.setDirection('N');
-        } else if (currentDirection == 'S') {
+            drone.setDirection(Direction.N);
+        } else if (currentDirection == Direction.S) {
             dir = super.turnEast();
-            drone.setDirection('E');
-        } else if (currentDirection == 'W') {
+            drone.setDirection(Direction.E);
+        } else if (currentDirection == Direction.W) {
             dir = super.turnSouth();
-            drone.setDirection('S');
-        } else if (currentDirection == 'N') {
+            drone.setDirection(Direction.S);
+        } else if (currentDirection == Direction.N) {
             dir = super.turnWest();
-            drone.setDirection('W');
+            drone.setDirection(Direction.W);
         }
 
         return dir;

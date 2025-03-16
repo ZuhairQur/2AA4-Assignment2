@@ -2,14 +2,16 @@ package ca.mcmaster.se2aa4.island.teamXXX;
 
 import org.json.JSONObject;
 
+import eu.ace_design.island.game.actions.Stop;
+
 public class Drone {
     private JSONObject decision;
-    private char direction;
+    private Direction direction;
     private ActionsQueue actionsQueue = new ActionsQueue();
 
     public Drone() {
         this.decision = new JSONObject();
-        this.direction = 'E';
+        this.direction = Direction.E;
         this.actionsQueue.fillWithActions();
     }
 
@@ -27,6 +29,10 @@ public class Drone {
     public JSONObject makeDecision(int batteryLevel) {
         this.decision.clear();
 
+        if (batteryLevel <= 100) {
+            return new Return().execute(this);
+        }
+
         Action currentAction = this.actionsQueue.getNextAction();
 
         this.decision = currentAction.execute(this);
@@ -38,7 +44,7 @@ public class Drone {
      *
      * @return a character representing the current direction ('N', 'E', 'S', or 'W').
      */
-    public char getDirection() {
+    public Direction getDirection() {
         return this.direction;
     }
 
@@ -47,7 +53,7 @@ public class Drone {
      * 
      * @param direction a character representing the new direction ('N', 'E', 'S', or 'W').
      */
-    public void setDirection(char direction) {
+    public void setDirection(Direction direction) {
         this.direction = direction;
     }
 }

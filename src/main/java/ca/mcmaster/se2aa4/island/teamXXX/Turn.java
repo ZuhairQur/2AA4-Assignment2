@@ -3,8 +3,8 @@ package ca.mcmaster.se2aa4.island.teamXXX;
 import org.json.JSONObject;
 
 public abstract class Turn implements Action {
-    private JSONObject instruction = new JSONObject();
-    private JSONObject dir = new JSONObject();
+    private final JSONObject instruction = new JSONObject();
+    private final JSONObject dir = new JSONObject();
 
     /**
      * Instructs the drone to turn. The drone will not move

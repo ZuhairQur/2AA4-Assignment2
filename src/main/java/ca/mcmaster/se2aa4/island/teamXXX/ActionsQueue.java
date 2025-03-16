@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class ActionsQueue {
+    private int spiralSize = 0;
     private Queue<Action> queue = new LinkedList<>();
     /**
      * Fills the queue with actions to head to the middle of the map. The actions
@@ -12,6 +13,7 @@ public class ActionsQueue {
      */
     public void fillWithActions() {
         this.headToMiddle();
+        this.spiralSearch();
     }
 
 
@@ -33,6 +35,87 @@ public class ActionsQueue {
         }
 
         this.queue.add(new Scan());
+    }
+
+    private void spiralSearch() {
+
+        this.queue.add(new Scan());
+        this.queue.add(new TurnLeft());
+
+        this.queue.add(new Scan());
+        this.queue.add(new TurnLeft());
+
+        this.queue.add(new Scan());
+        this.queue.add(new TurnLeft());
+
+        this.queue.add(new Scan());
+        this.queue.add(new Fly());
+        this.queue.add(new Scan());
+        this.queue.add(new TurnLeft());
+
+        // this.queue.add(new Scan());
+        // this.queue.add(new TurnLeft());
+
+        for (int i = 0; i < 30; i++) {
+            for (int j = 0; j < 2*i; j++) {
+                this.queue.add(new Scan());
+                this.queue.add(new Fly());
+            }
+
+            this.queue.add(new Scan());
+            this.queue.add(new Fly());
+            this.queue.add(new Scan());
+            this.queue.add(new TurnLeft());
+
+            for (int j = 0; j < 2*(i+1); j++) {
+                this.queue.add(new Scan());
+                this.queue.add(new Fly());
+            }
+
+            this.queue.add(new Scan());
+            this.queue.add(new TurnLeft());
+
+            for (int j = 0; j < 2*(i+1); j++) {
+                this.queue.add(new Scan());
+                this.queue.add(new Fly());
+            }
+
+            this.queue.add(new Scan());
+            this.queue.add(new TurnLeft());
+
+            for (int j = 0; j < 2*(i+1); j++) {
+                this.queue.add(new Scan());
+                this.queue.add(new Fly());
+            }
+
+            this.queue.add(new Scan());
+            this.queue.add(new Fly());
+            this.queue.add(new Scan());
+            this.queue.add(new TurnLeft());
+        }
+
+        // for (int i = 0; i < 5; i++) {
+        //     for (int k = 0; k < 3; k++) {
+        //         for (int j = 0; j < i; j++) {
+        //             this.queue.add(new Scan());
+        //             this.queue.add(new Fly());
+        //         }
+
+        //         this.queue.add(new Scan());
+        //         this.queue.add(new TurnLeft());
+        //     }
+
+        //     for (int j = 0; j < this.spiralSize; j++) {
+        //         this.queue.add(new Scan());
+        //         this.queue.add(new Fly());
+        //     }
+
+        //     this.queue.add(new Scan());
+        //     this.queue.add(new Fly());
+        //     this.queue.add(new Scan());
+        //     this.queue.add(new TurnLeft());
+        // }
+
         this.queue.add(new Return());
     }
 
