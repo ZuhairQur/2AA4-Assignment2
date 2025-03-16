@@ -44,7 +44,6 @@ public abstract class Turn implements Action {
         this.dir.clear();
 
         this.dir.put("direction", "W");
-
         this.instruction.put("action", "heading");
         this.instruction.put("parameters", this.dir);
 

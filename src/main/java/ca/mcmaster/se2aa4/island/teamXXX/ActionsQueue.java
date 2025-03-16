@@ -23,7 +23,7 @@ public class ActionsQueue {
      * given to the drone when it is first created.
      */
     private void headToMiddle() {
-        for (int i = 0; i < 25; i++) {
+        for (int i = 0; i < 27; i++) {
             this.queue.add(new Fly());
         }
 
