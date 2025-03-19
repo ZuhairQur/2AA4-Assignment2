@@ -8,11 +8,13 @@ public class Drone {
     private JSONObject decision;
     private Direction direction;
     private ActionsQueue actionsQueue = new ActionsQueue();
+    private Coordinates coordinates;
 
     public Drone() {
         this.decision = new JSONObject();
         this.direction = Direction.E;
         this.actionsQueue.fillWithActions();
+        this.coordinates = new Coordinates(getDirection());
     }
 
     /**
@@ -34,6 +36,11 @@ public class Drone {
         }
 
         Action currentAction = this.actionsQueue.getNextAction();
+        
+        if (currentAction instanceof Fly || currentAction instanceof Turn) {
+            coordinates.updateCoordsFly(getDirection());
+            System.out.print(coordinates.getCoordinates());
+        }
 
         this.decision = currentAction.execute(this);
         return this.decision;
