@@ -17,6 +17,7 @@ public class Explorer implements IExplorerRaid {
     private int stepsMoved = 0;  // Counts steps before turning
     private String direction;
     private Drone drone = new Drone();
+    private Map map = new Map(); 
 
     /**
      * Initializes the Exploration Command Center with the given information.
@@ -62,6 +63,10 @@ public class Explorer implements IExplorerRaid {
         logger.info("The status of the drone is {}", status);
         JSONObject extraInfo = response.getJSONObject("extras");
         logger.info("Additional information received: {}", extraInfo);
+
+        JsonParser parser = new JsonParser();
+        parser.parseAcknowledgment(response, map);
+        logger.info("Creek locations: {}", map.getCreekLocations());
     }
 
     @Override
