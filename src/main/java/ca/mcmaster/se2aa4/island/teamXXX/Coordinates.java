@@ -57,4 +57,21 @@ public class Coordinates {
     public List<Double> getCoordinates() {
         return coordList;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Coordinates that = (Coordinates) obj;
+        return this.x.equals(that.x) && this.y.equals(that.y);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = 17;
+        result = 31 * result + x.hashCode();
+        result = 31 * result + y.hashCode();
+        return result;
+    }
+
 }

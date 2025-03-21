@@ -83,7 +83,7 @@ public class Drone {
         return currentCoords;
     }
 
-    public void updateMemory(JSONObject response) {
-        JsonParser.parseAcknowledgment(response, map);
+    public Coordinates getCoordinates() {
+        return this.coordinates;
     }
 }
