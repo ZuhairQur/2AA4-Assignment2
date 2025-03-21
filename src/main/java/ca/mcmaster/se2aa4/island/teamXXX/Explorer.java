@@ -67,6 +67,9 @@ public class Explorer implements IExplorerRaid {
 
         JsonParser parser = new JsonParser();
         parser.parseAcknowledgment(response, map);
+
+        drone.updateMemory(response);
+
         logger.info("Creek locations: {}", map.getCreekLocations());
     }
 

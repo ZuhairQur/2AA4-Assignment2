@@ -13,12 +13,15 @@ public class Drone {
     private ActionsQueue actionsQueue = new ActionsQueue();
     private Coordinates coordinates;
     private String currentCoords;
+    private Map map; 
+
 
     public Drone() {
         this.decision = new JSONObject();
         this.direction = Direction.E;
         this.actionsQueue.fillWithActions();
         this.coordinates = new Coordinates(1.0,1.0);
+        this.map = new Map();
     }
 
     /**
@@ -37,6 +40,11 @@ public class Drone {
 
         if (batteryLevel <= 100) {
             return new Return().execute(this);
+        }
+
+        if (map.discoveredEmergencySite()) {
+            this.actionsQueue.clear();
+            this.actionsQueue.spiralSearch();
         }
 
         Action currentAction = this.actionsQueue.getNextAction();
@@ -73,5 +81,9 @@ public class Drone {
     public String getCoords() {
         currentCoords = coordinates.toString();
         return currentCoords;
+    }
+
+    public void updateMemory(JSONObject response) {
+        JsonParser.parseAcknowledgment(response, map);
     }
 }
