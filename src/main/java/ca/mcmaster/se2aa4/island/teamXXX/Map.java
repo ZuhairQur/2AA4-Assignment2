@@ -8,30 +8,30 @@ import java.util.HashMap;
 public class Map {
     private static final Logger logger = LogManager.getLogger(Map.class);  // Add logger here
     
-    private HashMap<String, Location> creekLocations;
-    private HashMap<String, Location> emergencySiteLocations;
+    private HashMap<Coordinates, Location> creekLocations;
+    private HashMap<Coordinates, Location> emergencySiteLocations;
 
     public Map() {
         this.creekLocations = new HashMap<>();
         this.emergencySiteLocations = new HashMap<>();
     }
 
-    public void addLocation(String id, LocationType type) {
+    public void addLocation(Coordinates coordinates, String id, LocationType type) {
         Location location = new Location(id, type);
         if (type == LocationType.CREEK) {
-            creekLocations.put(id, location);
+            creekLocations.put(coordinates, location);
             logger.info("Creek added: {}", id);  // Add logging for creek
         } else if (type == LocationType.EMERGENCY_SITE) {
-            emergencySiteLocations.put(id, location);
+            emergencySiteLocations.put(coordinates, location);
             logger.info("Emergency site added: {}", id);  // Add logging for emergency site
         }
     }
 
-    public HashMap<String, Location> getCreekLocations() {
+    public HashMap<Coordinates, Location> getCreekLocations() {
         return creekLocations;
     }
 
-    public HashMap<String, Location> getEmergencySiteLocations() {
+    public HashMap<Coordinates, Location> getEmergencySiteLocations() {
         return emergencySiteLocations;
     }
 

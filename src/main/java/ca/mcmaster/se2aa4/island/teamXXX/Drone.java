@@ -74,4 +74,8 @@ public class Drone {
         currentCoords = coordinates.toString();
         return currentCoords;
     }
+
+    public Coordinates getCoordinates() {
+        return this.coordinates;
+    }
 }
