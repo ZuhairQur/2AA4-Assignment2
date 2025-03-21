@@ -54,6 +54,7 @@ public class Explorer implements IExplorerRaid {
     public void acknowledgeResults(String s) {
         JSONObject response = new JSONObject(new JSONTokener(new StringReader(s)));
         logger.info("** Response received:\n"+response.toString(2));
+        logger.info(drone.getCoords());
         Integer cost = response.getInt("cost");
 
         batteryLevel -= cost;

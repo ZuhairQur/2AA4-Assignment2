@@ -2,19 +2,23 @@ package ca.mcmaster.se2aa4.island.teamXXX;
 
 import org.json.JSONObject;
 
-import eu.ace_design.island.game.actions.Stop;
+import ca.mcmaster.se2aa4.island.teamXXX.Action.Action;
+import ca.mcmaster.se2aa4.island.teamXXX.Action.ActionType;
+import ca.mcmaster.se2aa4.island.teamXXX.Action.ActionsQueue;
+import ca.mcmaster.se2aa4.island.teamXXX.Action.Return;
 
 public class Drone {
     private JSONObject decision;
     private Direction direction;
     private ActionsQueue actionsQueue = new ActionsQueue();
     private Coordinates coordinates;
+    private String currentCoords;
 
     public Drone() {
         this.decision = new JSONObject();
         this.direction = Direction.E;
         this.actionsQueue.fillWithActions();
-        this.coordinates = new Coordinates(getDirection());
+        this.coordinates = new Coordinates(1.0,1.0);
     }
 
     /**
@@ -36,13 +40,15 @@ public class Drone {
         }
 
         Action currentAction = this.actionsQueue.getNextAction();
-        
-        if (currentAction instanceof Fly || currentAction instanceof Turn) {
+        ActionType actionType = currentAction.getActionType();
+
+        this.decision = currentAction.execute(this);
+
+        if (actionType == ActionType.FLY || actionType == ActionType.TURN) {
             coordinates.updateCoordsFly(getDirection());
             System.out.print(coordinates.getCoordinates());
         }
 
-        this.decision = currentAction.execute(this);
         return this.decision;
     }
 
@@ -62,5 +68,10 @@ public class Drone {
      */
     public void setDirection(Direction direction) {
         this.direction = direction;
+    }
+
+    public String getCoords() {
+        currentCoords = coordinates.toString();
+        return currentCoords;
     }
 }

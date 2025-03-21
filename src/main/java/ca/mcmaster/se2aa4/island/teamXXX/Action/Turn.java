@@ -1,6 +1,8 @@
-package ca.mcmaster.se2aa4.island.teamXXX;
+package ca.mcmaster.se2aa4.island.teamXXX.Action;
 
 import org.json.JSONObject;
+
+import ca.mcmaster.se2aa4.island.teamXXX.Drone;
 
 public abstract class Turn implements Action {
     private final JSONObject instruction = new JSONObject();
@@ -16,6 +18,11 @@ public abstract class Turn implements Action {
      */
     @Override
     public abstract JSONObject execute(Drone drone);
+
+    @Override
+    public ActionType getActionType() {
+        return ActionType.TURN;
+    }
 
     /**
      * Instructs the drone to turn and face South. The drone will not move

@@ -10,11 +10,11 @@ public class Coordinates {
     private Double y;
     private List<Double> coordList;
     
-    public Coordinates(Direction direction) {
-        this.direction = direction;
+    public Coordinates(Double x, Double y) {
+        this.direction = Direction.E;
         this.prevDirection = this.direction;
-        this.x = 0.0; //PLACEHOLDER
-        this.y = 0.0; //PLACEHOLDER
+        this.x = x;
+        this.y = y;
         this.coordList = new ArrayList<>();
         coordList.add(x);
         coordList.add(y);
@@ -41,9 +41,20 @@ public class Coordinates {
         prevDirection = direction;
     }
 
-    public String getCoordinates() {
-        String printCoordList = "(" + coordList.get(0) + coordList.get(1) + ")";
-        return printCoordList;
+    public Double getX() {
+        return this.x;
+    }
+
+    public Double getY() {
+        return this.y;
+    }
+
+    public String toString() {
+        String printCoordinate = "(" + this.x + "," + this.y + ")";
+        return printCoordinate;
     }
     
+    public List<Double> getCoordinates() {
+        return coordList;
+    }
 }
