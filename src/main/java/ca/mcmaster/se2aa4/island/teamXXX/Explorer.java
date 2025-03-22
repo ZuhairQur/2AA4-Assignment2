@@ -1,6 +1,7 @@
 package ca.mcmaster.se2aa4.island.teamXXX;
 
 import java.io.StringReader;
+import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -13,11 +14,8 @@ public class Explorer implements IExplorerRaid {
 
     private final Logger logger = LogManager.getLogger();
     private Integer batteryLevel; 
-    private boolean lastActionWasFly = false;  // Tracks if last action was "fly"
-    private int stepsMoved = 0;  // Counts steps before turning
     private String direction;
     private Drone drone;
-    private Map map = new Map(); 
 
     /**
      * Initializes the Exploration Command Center with the given information.
@@ -56,29 +54,22 @@ public class Explorer implements IExplorerRaid {
     @Override
     public void acknowledgeResults(String s) {
         JSONObject response = new JSONObject(new JSONTokener(new StringReader(s)));
-        logger.info("** Response received:\n"+response.toString(2));
-        logger.info(drone.getCoordinates().toString());
-        Integer cost = response.getInt("cost");
 
-        drone.updateBattery(cost);
+        JsonParser parser = new JsonParser(List.of(
+            new CostJsonAdapter(),
+            new StatusJsonAdapter(),
+            new CreekJsonAdapter(),
+            new EmergencySiteJsonAdapter()
+        ));
 
-        logger.info("The cost of the action was {}", cost);
-        String status = response.getString("status");
-        logger.info("The status of the drone is {}", status);
-        JSONObject extraInfo = response.getJSONObject("extras");
-        logger.info("Additional information received: {}", extraInfo);
-
-        JsonParser parser = new JsonParser();
-        parser.parseAcknowledgment(response, map, drone.getCoordinates());
-        drone.updateMemory(response);
-        System.out.println("hi");
-        logger.info("Creek locations: {}", map.getCreekLocations());
-        logger.info("Emergency site locations: {}", map.getEmergencySiteLocations());
-    }
+        parser.parseAcknowledgment(response, drone); 
+    } 
 
     @Override
     public String deliverFinalReport() {
-        logger.info("Nearest creek: {}", map.nearestCreekToEmergencySite());
+        logger.info("Nearest creek: {}", drone.getMap().nearestCreekToEmergencySite());
+        logger.info("Creek locations: {}", drone.getMap().getCreekIds());
+        logger.info("Emergency sites: {}", drone.getMap().getEmergencySiteId());
         return "no creek found";
     }
 
