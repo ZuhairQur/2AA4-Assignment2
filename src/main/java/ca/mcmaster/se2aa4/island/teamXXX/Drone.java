@@ -10,6 +10,7 @@ import ca.mcmaster.se2aa4.island.teamXXX.Action.Return;
 public class Drone {
     private JSONObject decision;
     private Direction direction;
+    private Integer batteryLevel;
     private ActionsQueue actionsQueue = new ActionsQueue();
     private Coordinates coordinates;
     private String currentCoords;
@@ -17,7 +18,8 @@ public class Drone {
     private Map map; 
 
 
-    public Drone() {
+    public Drone(Integer batteryLevel) {
+        this.batteryLevel = batteryLevel;
         this.decision = new JSONObject();
         this.direction = Direction.E;
         this.actionsQueue.fillWithActions();
@@ -25,18 +27,17 @@ public class Drone {
         this.map = new Map();
     }
 
+
     /**
-     * Generates a decision for the drone based on the current step count and
-     * battery level. The decision is either to move forward, turn right, or
-     * scan. The drone will move to the middle of the map in a zig-zag pattern
-     * and then perform a spiral search after that.
+     * Makes a decision for the drone based on its current state and the map.
+     * The decision involves executing actions from a queue, handling battery
+     * constraints, and reacting to discovered emergency sites. If the battery
+     * level is low, the drone will return. The decision updates the drone's
+     * coordinates if the action is a fly or turn.
      *
-     * @param batteryLevel The current battery level of the drone.
-     * @return A JSONObject containing the action to take, which is one of
-     *         "fly", "heading", or "scan", and any additional parameters
-     *         required for the action.
+     * @return A JSONObject containing the decision to execute.
      */
-    public JSONObject makeDecision(int batteryLevel) {
+    public JSONObject makeDecision() {
         this.decision.clear();
 
         if (batteryLevel <= 100) {
@@ -69,6 +70,11 @@ public class Drone {
      */
     public Direction getDirection() {
         return this.direction;
+    }
+
+    public int updateBattery(int cost) {
+        this.batteryLevel -= cost;
+        return batteryLevel;
     }
 
     /**
