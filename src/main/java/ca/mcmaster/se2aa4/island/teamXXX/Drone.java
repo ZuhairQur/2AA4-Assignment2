@@ -91,10 +91,15 @@ public class Drone {
         return currentCoords;
     }
 
-    public void updateMemory(JSONObject response) {
-        JsonParser.parseAcknowledgment(response, map, coordinates);
-    }
+    //public void updateMemory(JSONObject response) {
+    //    JsonParser.parseAcknowledgment(response, map, this);
+    //}
+    
     public Coordinates getCoordinates() {
         return this.coordinates;
+    }
+
+    public Map getMap() {
+        return this.map;
     }
 }
