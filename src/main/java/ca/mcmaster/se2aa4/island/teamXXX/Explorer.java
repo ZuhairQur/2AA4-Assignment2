@@ -13,8 +13,6 @@ public class Explorer implements IExplorerRaid {
 
     private final Logger logger = LogManager.getLogger();
     private Integer batteryLevel; 
-    private boolean lastActionWasFly = false;  // Tracks if last action was "fly"
-    private int stepsMoved = 0;  // Counts steps before turning
     private String direction;
     private Drone drone = new Drone();
     private Map map = new Map(); 
@@ -68,14 +66,14 @@ public class Explorer implements IExplorerRaid {
         JsonParser parser = new JsonParser();
         parser.parseAcknowledgment(response, map, drone.getCoordinates());
         drone.updateMemory(response);
-        System.out.println("hi");
-        logger.info("Creek locations: {}", map.getCreekLocations());
-        logger.info("Emergency site locations: {}", map.getEmergencySiteLocations());
+        
     }
 
     @Override
     public String deliverFinalReport() {
         logger.info("Nearest creek: {}", map.nearestCreekToEmergencySite());
+        logger.info("Creek locations: {}", map.getCreekIds());
+        logger.info("Emergency sites: {}", map.getEmergencySiteId());
         return "no creek found";
     }
 

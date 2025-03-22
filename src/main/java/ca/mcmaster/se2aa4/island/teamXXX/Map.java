@@ -1,12 +1,13 @@
 package ca.mcmaster.se2aa4.island.teamXXX;
 
 import java.util.HashMap;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class Map {
-    private static final Logger logger = LogManager.getLogger(Map.class);  // Add logger here
     
     private HashMap<Coordinates, Location> creekLocations;
     private HashMap<Coordinates, Location> emergencySiteLocations;
@@ -20,19 +21,21 @@ public class Map {
         Location location = new Location(id, type);
         if (type == LocationType.CREEK) {
             creekLocations.put(coordinates, location);
-            logger.info("Creek added: {}", id);  // Add logging for creek
         } else if (type == LocationType.EMERGENCY_SITE) {
             emergencySiteLocations.put(coordinates, location);
-            logger.info("Emergency site added: {}", id);  // Add logging for emergency site
         }
     }
 
-    public HashMap<Coordinates, Location> getCreekLocations() {
-        return creekLocations;
+    public List<String> getCreekIds() {
+        return creekLocations.values().stream()
+                .map(Location::getId)
+                .collect(Collectors.toList());
     }
 
-    public HashMap<Coordinates, Location> getEmergencySiteLocations() {
-        return emergencySiteLocations;
+    public List<String> getEmergencySiteId() {
+        return emergencySiteLocations.values().stream()
+                .map(Location::getId)
+                .collect(Collectors.toList());
     }
 
     public String nearestCreekToEmergencySite() {
