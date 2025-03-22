@@ -13,7 +13,6 @@ public class Drone {
     private Integer batteryLevel;
     private ActionsQueue actionsQueue = new ActionsQueue();
     private Coordinates coordinates;
-    private String currentCoords;
     private boolean detectedEmergencySite = false;
     private Map map; 
 
@@ -84,11 +83,6 @@ public class Drone {
      */
     public void setDirection(Direction direction) {
         this.direction = direction;
-    }
-
-    public String getCoords() {
-        currentCoords = coordinates.toString();
-        return currentCoords;
     }
 
     //public void updateMemory(JSONObject response) {

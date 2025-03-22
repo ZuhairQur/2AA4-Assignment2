@@ -1,7 +1,6 @@
 package ca.mcmaster.se2aa4.island.teamXXX;
 
 import java.io.StringReader;
-import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -16,6 +15,7 @@ public class Explorer implements IExplorerRaid {
     private Integer batteryLevel; 
     private String direction;
     private Drone drone;
+    private ResponseManager responseManager;
 
     /**
      * Initializes the Exploration Command Center with the given information.
@@ -32,6 +32,13 @@ public class Explorer implements IExplorerRaid {
         batteryLevel = info.getInt("budget");
 
         drone = new Drone(batteryLevel);
+
+        responseManager = new ResponseManager();
+
+        responseManager.add(new CostObserver());
+        responseManager.add(new StatusObserver());
+        responseManager.add(new CreekObserver());
+        responseManager.add(new EmergencySiteObserver());
 
         logger.info("The drone is facing {}", direction);
         logger.info("Battery level is {}", batteryLevel);
@@ -54,15 +61,15 @@ public class Explorer implements IExplorerRaid {
     @Override
     public void acknowledgeResults(String s) {
         JSONObject response = new JSONObject(new JSONTokener(new StringReader(s)));
+        responseManager.notifyObservers(response, drone);
+        // JsonParser parser = new JsonParser(List.of(
+        //     new CostJsonAdapter(),
+        //     new StatusJsonAdapter(),
+        //     new CreekJsonAdapter(),
+        //     new EmergencySiteJsonAdapter()
+        // ));
 
-        JsonParser parser = new JsonParser(List.of(
-            new CostJsonAdapter(),
-            new StatusJsonAdapter(),
-            new CreekJsonAdapter(),
-            new EmergencySiteJsonAdapter()
-        ));
-
-        parser.parseAcknowledgment(response, drone); 
+        //parser.parseAcknowledgment(response, drone); 
     } 
 
     @Override
