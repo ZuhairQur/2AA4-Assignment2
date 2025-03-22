@@ -35,6 +35,23 @@ public class Map {
         return emergencySiteLocations;
     }
 
+    public String nearestCreekToEmergencySite() {
+        String nearestCreekId = null;
+        double minDistance = Double.MAX_VALUE;
+        
+        for (Coordinates emergencyCoordinates : emergencySiteLocations.keySet()) {
+            for (Coordinates creekCoordinates : creekLocations.keySet()) {
+                double distance = emergencyCoordinates.distance(creekCoordinates);
+                if (distance < minDistance) {
+                    minDistance = distance;
+                    nearestCreekId = creekLocations.get(creekCoordinates).getId();
+                }
+            }
+        }
+        
+        return nearestCreekId != null ? nearestCreekId : "No creek found";
+    }
+
     public boolean discoveredEmergencySite() {
         return !emergencySiteLocations.isEmpty();
     }

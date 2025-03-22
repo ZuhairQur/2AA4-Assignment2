@@ -73,6 +73,7 @@ public class Explorer implements IExplorerRaid {
 
     @Override
     public String deliverFinalReport() {
+        logger.info("Nearest creek: {}", map.nearestCreekToEmergencySite());
         return "no creek found";
     }
 
