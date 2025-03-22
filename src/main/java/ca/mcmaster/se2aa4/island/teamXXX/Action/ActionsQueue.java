@@ -29,7 +29,6 @@ public class ActionsQueue {
             this.queue.add(new Fly());
         }
 
-        this.queue.add(new Scan());
         this.queue.add(new TurnRight());
 
         for (int i = 0; i < 25; i++) {
@@ -41,10 +40,7 @@ public class ActionsQueue {
 
     public void spiralSearch() {
 
-        this.sharpTurn();
-        this.sharpTurn();
-        this.sharpTurn();
-        this.wideTurn();
+   
 
         // this.queue.add(new Scan());
         // this.queue.add(new TurnLeft());

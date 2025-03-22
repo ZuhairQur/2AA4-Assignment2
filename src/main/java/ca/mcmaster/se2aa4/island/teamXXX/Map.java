@@ -1,9 +1,9 @@
 package ca.mcmaster.se2aa4.island.teamXXX;
 
+import java.util.HashMap;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import java.util.HashMap;
 
 public class Map {
     private static final Logger logger = LogManager.getLogger(Map.class);  // Add logger here

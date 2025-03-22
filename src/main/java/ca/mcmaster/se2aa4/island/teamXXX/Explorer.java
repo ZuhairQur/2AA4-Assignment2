@@ -68,11 +68,14 @@ public class Explorer implements IExplorerRaid {
         JsonParser parser = new JsonParser();
         parser.parseAcknowledgment(response, map, drone.getCoordinates());
         drone.updateMemory(response);
+        System.out.println("hi");
         logger.info("Creek locations: {}", map.getCreekLocations());
+        logger.info("Emergency site locations: {}", map.getEmergencySiteLocations());
     }
 
     @Override
     public String deliverFinalReport() {
+        System.out.println("NO CREEK FOUND");
         return "no creek found";
     }
 
