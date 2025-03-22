@@ -1,15 +1,14 @@
 package ca.mcmaster.se2aa4.island.teamXXX;
 
-import org.json.JSONObject;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import ca.mcmaster.se2aa4.island.teamXXX.Drone;
+import org.json.JSONObject;
 
-public class CostJsonAdapter implements JsonAdapter {
-    private static final Logger logger = LogManager.getLogger(CostJsonAdapter.class);
+public class CostObserver implements ResponseObserver {
+    private static final Logger logger = LogManager.getLogger(CostObserver.class);
 
     @Override
-    public void parse(JSONObject response, Drone drone) {
+    public void update(JSONObject response, Drone drone) {
         if (response.has("cost")) {
             int cost = response.getInt("cost");
             drone.updateBattery(cost);
