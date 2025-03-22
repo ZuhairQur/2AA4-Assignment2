@@ -8,4 +8,8 @@ public class Location {
         this.id = id; 
         this.type = type; 
     } 
+
+    public String getId() { 
+        return id; 
+    }
 }
