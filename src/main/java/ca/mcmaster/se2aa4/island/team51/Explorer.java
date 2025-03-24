@@ -18,7 +18,7 @@ import eu.ace_design.island.bot.IExplorerRaid;
 
 public class Explorer implements IExplorerRaid {
 
-    private final Logger logger = LogManager.getLogger(); 
+    private final Logger logger = LogManager.getLogger();
     private Drone drone;
     private ResponseManager responseManager;
     private Map map = new Map(); 
@@ -64,12 +64,25 @@ public class Explorer implements IExplorerRaid {
         return decision.toString();
     }
 
+    /**
+     * Called after the drone has taken an action. The given string is a
+     * JSONObject containing information about the results of the action.
+     *
+     * @param s a JSONObject containing the results of the action.
+     */
     @Override
     public void acknowledgeResults(String s) {
         JSONObject response = new JSONObject(new JSONTokener(new StringReader(s)));
         responseManager.notifyObservers(response, drone, map);
     } 
 
+    /**
+     * Delivers the final exploration report by logging and returning information
+     * about the nearest creek, all creek locations, and emergency sites.
+     *
+     * @return A string containing details of the nearest creek, creeks, and
+     *         emergency sites.
+     */
     @Override
     public String deliverFinalReport() {
         logger.info("Nearest creek: {}", map.nearestCreekToEmergencySite());

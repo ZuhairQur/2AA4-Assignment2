@@ -12,9 +12,6 @@ public class Fly implements Action {
      * @param drone The drone object to send the instruction to.
      * @return A JSONObject containing the instruction to send to the drone.
      */
-
-    //private final ActionEnum type = ActionEnum.FLY;
-
     @Override
     public JSONObject execute(Drone drone) {
         JSONObject instruction = new JSONObject();

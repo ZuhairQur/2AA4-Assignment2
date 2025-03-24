@@ -11,6 +11,11 @@ public class Location {
         this.type = type; 
     } 
 
+    /**
+     * Gets the id of the location.
+     *
+     * @return The id of the location.
+     */
     public String getId() { 
         return id; 
     }

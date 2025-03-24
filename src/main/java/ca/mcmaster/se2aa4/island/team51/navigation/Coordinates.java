@@ -20,6 +20,11 @@ public class Coordinates {
         coordList.add(y);
     }
 
+    /**
+     * Updates the coordinates of the drone based on the given direction. If the given direction is the same as the previous direction, the coordinates are incremented/decremented accordingly. The coordinates are then updated in the coordList.
+     * 
+     * @param direction the direction to update the coordinates with
+     */
     public void updateCoords(Direction direction) {
         this.direction = direction;
         if (direction == Direction.E || prevDirection == Direction.E) {
@@ -41,23 +46,45 @@ public class Coordinates {
         prevDirection = direction;
     }
 
+    /**
+     * Returns the x-coordinate of the coordinates.
+     * @return The x-coordinate.
+     */
     public Double getX() {
         return this.x;
     }
 
+    /**
+     * Returns the y-coordinate of the coordinates.
+     * @return The y-coordinate.
+     */
     public Double getY() {
         return this.y;
     }
 
-    @Override
+    /**
+     * Returns a string representation of the coordinates, in the format (x,y).
+     * @return A string containing the coordinates.
+     */
     public String toString() {
         return "(" + this.x + "," + this.y + ")";
     }
     
+    /**
+     * Retrieves the current coordinates as a list.
+     *
+     * @return A list containing the x and y coordinates.
+     */
     public List<Double> getCoordinates() {
         return coordList;
     }
 
+    /**
+     * Compares two sets of coordinates for equality.
+     * 
+     * @param obj The other set of coordinates to compare to.
+     * @return True if the two sets of coordinates are equal, false otherwise.
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj){ 
@@ -78,6 +105,12 @@ public class Coordinates {
         return result;
      }
 
+    /**
+     * Calculates the Euclidean distance between two coordinates.
+     * 
+     * @param other The other set of coordinates to calculate the distance to.
+     * @return The distance between the two coordinates.
+     */
     public double distance(Coordinates other) {
         double dx = this.x - other.x;
         double dy = this.y - other.y;

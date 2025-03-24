@@ -9,6 +9,16 @@ import ca.mcmaster.se2aa4.island.team51.navigation.Drone;
 import ca.mcmaster.se2aa4.island.team51.navigation.Map;
 
 public class CreekObserver implements ResponseObserver {
+    
+    /**
+     * Updates the map with creek locations based on the given response.
+     * If the response contains creek information, the method adds the creeks
+     * to the map at the coordinates of the drone.
+     *
+     * @param response A JSONObject containing the response from the drone.
+     * @param drone    The drone for which to update the map.
+     * @param map      The map being used for this exploration.
+     */
     @Override
     public void update(JSONObject response, Drone drone, Map map) {
         if (response.has("extras") && response.getJSONObject("extras").has("creeks")) {

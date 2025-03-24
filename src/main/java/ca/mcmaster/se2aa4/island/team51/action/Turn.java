@@ -32,6 +32,13 @@ public class Turn implements Action {
         return this.turnRight(drone);
     }
 
+    /**
+     * Instructs the drone to turn 90 degrees to the left based on its current direction.
+     * Updates the drone's direction accordingly but does not move the drone forward.
+     *
+     * @param drone The drone object whose direction is to be changed.
+     * @return A JSONObject containing the new heading direction for the drone.
+     */
     private JSONObject turnLeft(Drone drone) {
         Direction currentDirection = drone.getDirection();
         JSONObject dir = new JSONObject();
@@ -53,6 +60,14 @@ public class Turn implements Action {
         return dir;
     }
 
+    /**
+     * Instructs the drone to turn to the right. The drone will not move
+     * forward after turning, and will not perform any further actions until
+     * it is given a new instruction.
+     *
+     * @param drone The drone object to send the instruction to.
+     * @return A JSONObject containing the instruction to send to the drone.
+     */
     private JSONObject turnRight(Drone drone) {
         Direction currentDirection = drone.getDirection();
         JSONObject dir = new JSONObject();
