@@ -1,3 +1,12 @@
+/**
+ * File: EmergencySiteObserver.java
+ * Authors: Nithika Karunamoorthy, Stella Liu, Zuhair Qureshi
+ * Description: The EmergencySiteObserver class implements the ResponseObserver interface 
+ * and is responsible for detecting and recording emergency sites discovered by the drone. 
+ * When the response contains emergency site information, it updates the map with the site's 
+ * coordinates and assigns it the appropriate location type.
+ */
+
 package ca.mcmaster.se2aa4.island.team51.observers;
 
 import org.json.JSONArray;

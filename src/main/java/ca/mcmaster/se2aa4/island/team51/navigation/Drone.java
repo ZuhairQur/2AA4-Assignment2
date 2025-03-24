@@ -1,3 +1,12 @@
+/**
+ * File: Drone.java
+ * Authors: Nithika Karunamoorthy, Stella Liu, Zuhair Qureshi
+ * Description: The Drone class represents a drone that navigates the exploration map, 
+ * makes decisions based on its current state, and executes actions like flying or turning. 
+ * It manages its battery level, coordinates, direction, and a sequence of actions. The class 
+ * also handles responses to discovered emergency sites and adjusts its behavior accordingly.
+ */
+
 package ca.mcmaster.se2aa4.island.team51.navigation;
 
 import org.json.JSONObject;

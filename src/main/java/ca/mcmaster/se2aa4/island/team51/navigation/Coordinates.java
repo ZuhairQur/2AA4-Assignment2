@@ -1,3 +1,12 @@
+/**
+ * File: Coordinates.java
+ * Authors: Nithika Karunamoorthy, Stella Liu, Zuhair Qureshi
+ * Description: The Coordinates class represents the location of the drone in a 2D space. 
+ * It stores the x and y coordinates and allows for updating and retrieving the coordinates. 
+ * The class also supports comparing coordinates, calculating distances between coordinates, 
+ * and maintaining the drone's movement direction.
+ */
+
 package ca.mcmaster.se2aa4.island.team51.navigation;
 
 import java.util.ArrayList;

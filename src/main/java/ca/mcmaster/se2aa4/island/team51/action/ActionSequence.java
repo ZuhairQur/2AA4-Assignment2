@@ -1,3 +1,11 @@
+/**
+ * File: ActionSequence.java
+ * Authors: Nithika Karunamoorthy, Stella Liu, Zuhair Qureshi
+ * Description: The ActionSequence class manages a sequence of actions for the drone to perform. 
+ * It provides methods to fill the action queue with predefined action patterns like moving towards the middle of the map, performing a spiral search, and turning. 
+ * The actions are executed in order, with methods for clearing the queue, retrieving the next action, and performing specific turns and movements.
+ */
+
 package ca.mcmaster.se2aa4.island.team51.action;
 import java.util.LinkedList;
 import java.util.Queue;

@@ -1,3 +1,12 @@
+/**
+ * File: Fly.java
+ * Authors: Nithika Karunamoorthy, Stella Liu, Zuhair Qureshi
+ * Description: The Fly class implements the Action interface and represents the action
+ * of moving the drone forward by one space in the current direction. The execute method
+ * creates a JSONObject containing the "fly" action, which is sent to the drone. The 
+ * getActionType method returns the FLY action type associated with this class.
+ */
+
 package ca.mcmaster.se2aa4.island.team51.action;
 import org.json.JSONObject;
 

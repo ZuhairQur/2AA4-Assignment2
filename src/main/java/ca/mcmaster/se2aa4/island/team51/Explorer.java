@@ -1,3 +1,13 @@
+/**
+ * File: Explorer.java
+ * Authors: Nithika Karunamoorthy, Stella Liu, Zuhair Qureshi
+ * Description: The Explorer class implements the IExplorerRaid interface and serves as the 
+ * central control system for the drone's exploration mission. It initializes the drone with 
+ * the given parameters, processes decisions based on the current state of the mission, 
+ * acknowledges and processes results, and delivers a final exploration report containing 
+ * information about creeks and emergency sites.
+ */
+
 package ca.mcmaster.se2aa4.island.team51;
 
 import java.io.StringReader;
