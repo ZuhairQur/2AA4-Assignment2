@@ -7,19 +7,18 @@ import org.apache.logging.log4j.Logger;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
-import ca.mcmaster.se2aa4.island.team51.Navigation.Drone;
-import ca.mcmaster.se2aa4.island.team51.Navigation.Map;
-import ca.mcmaster.se2aa4.island.team51.Observers.CostObserver;
-import ca.mcmaster.se2aa4.island.team51.Observers.CreekObserver;
-import ca.mcmaster.se2aa4.island.team51.Observers.EmergencySiteObserver;
-import ca.mcmaster.se2aa4.island.team51.Observers.ResponseManager;
-import ca.mcmaster.se2aa4.island.team51.Observers.StatusObserver;
+import ca.mcmaster.se2aa4.island.team51.navigation.Drone;
+import ca.mcmaster.se2aa4.island.team51.navigation.Map;
+import ca.mcmaster.se2aa4.island.team51.observers.CostObserver;
+import ca.mcmaster.se2aa4.island.team51.observers.CreekObserver;
+import ca.mcmaster.se2aa4.island.team51.observers.EmergencySiteObserver;
+import ca.mcmaster.se2aa4.island.team51.observers.ResponseManager;
+import ca.mcmaster.se2aa4.island.team51.observers.StatusObserver;
 import eu.ace_design.island.bot.IExplorerRaid; 
 
 public class Explorer implements IExplorerRaid {
 
-    private final Logger logger = LogManager.getLogger();
-    private Integer batteryLevel; 
+    private final Logger logger = LogManager.getLogger(); 
     private Drone drone;
     private ResponseManager responseManager;
     private Map map = new Map(); 
@@ -36,7 +35,7 @@ public class Explorer implements IExplorerRaid {
         JSONObject info = new JSONObject(new JSONTokener(new StringReader(s)));
         logger.info("** Initialization info:\n {}",info.toString(2));
         String direction = info.getString("heading");
-        batteryLevel = info.getInt("budget");
+        Integer batteryLevel = info.getInt("budget");
 
         drone = new Drone(batteryLevel);
 
