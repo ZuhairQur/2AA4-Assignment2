@@ -1,3 +1,13 @@
+/**
+ * File: Scan.java
+ * Authors: Nithika Karunamoorthy, Stella Liu, Zuhair Qureshi
+ * Description: The Scan class implements the Action interface and represents the 
+ * action of scanning the current space. The execute method creates a JSONObject 
+ * containing the "scan" action, which is sent to the drone. This instructs the drone 
+ * to stop moving and perform a scan. The getActionType method returns the SCAN 
+ * action type associated with this class.
+ */
+
 package ca.mcmaster.se2aa4.island.team51.action;
 import org.json.JSONObject;
 

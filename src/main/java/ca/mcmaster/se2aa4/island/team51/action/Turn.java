@@ -1,3 +1,16 @@
+/**
+ * File: Turn.java
+ * Authors: Nithika Karunamoorthy, Stella Liu, Zuhair Qureshi
+ * Description: The Turn class implements the Action interface and represents the 
+ * action of turning the drone 90 degrees either left or right. The drone will 
+ * not move forward after turning, and will only change its facing direction. 
+ * The execute method determines which direction the drone should turn (left or right) 
+ * based on its current direction. The turn methods (turnLeft, turnRight, etc.) 
+ * update the drone's heading direction, and return a JSONObject with the "heading" 
+ * action to send to the drone.
+ */
+
+
 package ca.mcmaster.se2aa4.island.team51.action;
 
 import org.json.JSONObject;

@@ -1,3 +1,12 @@
+/**
+ * File: CostObserver.java
+ * Authors: Nithika Karunamoorthy, Stella Liu, Zuhair Qureshi
+ * Description: The CostObserver class implements the ResponseObserver interface and is 
+ * responsible for monitoring and updating the drone's battery level based on the 
+ * response received. If the response contains a cost, the observer subtracts it from 
+ * the drone's battery and logs the action cost.
+ */
+
 package ca.mcmaster.se2aa4.island.team51.observers;
 
 import org.apache.logging.log4j.LogManager;

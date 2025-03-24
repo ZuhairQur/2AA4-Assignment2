@@ -1,3 +1,12 @@
+/**
+ * File: StatusObserver.java
+ * Authors: Nithika Karunamoorthy, Stella Liu, Zuhair Qureshi
+ * Description: The StatusObserver class implements the ResponseObserver interface and is 
+ * responsible for monitoring and logging the status of the drone based on responses received. 
+ * It extracts the "status" field from the response and logs the drone's current status.
+ */
+
+
 package ca.mcmaster.se2aa4.island.team51.observers;
 
 import org.apache.logging.log4j.LogManager;

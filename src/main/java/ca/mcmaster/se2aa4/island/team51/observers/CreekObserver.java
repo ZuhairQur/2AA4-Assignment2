@@ -1,3 +1,13 @@
+/**
+ * File: CreekObserver.java
+ * Authors: Nithika Karunamoorthy, Stella Liu, Zuhair Qureshi
+ * Description: The CreekObserver class implements the ResponseObserver interface and is 
+ * responsible for detecting and recording creek locations discovered by the drone. 
+ * When the response contains creek information, it updates the map with the creek's 
+ * coordinates and assigns it the appropriate location type.
+ */
+
+
 package ca.mcmaster.se2aa4.island.team51.observers;
 
 import org.json.JSONArray;

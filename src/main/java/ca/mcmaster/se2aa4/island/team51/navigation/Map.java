@@ -1,3 +1,13 @@
+/**
+ * File: Map.java
+ * Authors: Nithika Karunamoorthy, Stella Liu, Zuhair Qureshi
+ * Description: The Map class maintains a record of discovered locations, including creeks 
+ * and emergency sites, during the drone's exploration. It provides methods for adding new 
+ * locations, retrieving lists of discovered locations, determining the nearest creek to an 
+ * emergency site, and checking if any emergency sites have been found.
+ */
+
+
 package ca.mcmaster.se2aa4.island.team51.navigation;
 
 import java.util.HashMap;
