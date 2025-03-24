@@ -97,6 +97,12 @@ public class Coordinates {
         return this.x.equals(that.x) && this.y.equals(that.y);
     }
 
+    /**
+     * Generates a hash code for the coordinates. The hash code is a combination
+     * of the hash codes of the x and y coordinates.
+     * 
+     * @return A hash code for the coordinates.
+     */
     @Override
     public int hashCode() {
         int result = 17;
