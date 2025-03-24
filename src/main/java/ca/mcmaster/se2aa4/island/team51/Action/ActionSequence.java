@@ -3,8 +3,8 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class ActionSequence {
-    private int spiralSize = 0;
     private Queue<Action> queue = new LinkedList<>();
+    
     /**
      * Fills the queue with actions to head to the middle of the map. The actions
      * are: 25 fly, scan, turn right, 25 fly. This is the initial action sequence

@@ -8,9 +8,9 @@ import ca.mcmaster.se2aa4.island.team51.Action.ActionType;
 import ca.mcmaster.se2aa4.island.team51.Action.Return;
 
 public class Drone {
+    private Integer batteryLevel;
     private JSONObject decision;
     private Direction direction;
-    private Integer batteryLevel;
     private ActionSequence actionSequence = new ActionSequence();
     private Coordinates coordinates;
     private boolean detectedEmergencySite = false;
@@ -22,6 +22,7 @@ public class Drone {
         this.direction = Direction.E;
         this.actionSequence.fillWithActions();
         this.coordinates = new Coordinates(1.0,1.0);
+        this.detectedEmergencySite = false;
     }
 
 
@@ -69,6 +70,12 @@ public class Drone {
         return this.direction;
     }
 
+    /**
+     * Updates the battery level of the drone by subtracting the given cost.
+     * 
+     * @param cost the amount to subtract from the battery level
+     * @return the updated battery level
+     */
     public int updateBattery(int cost) {
         this.batteryLevel -= cost;
         return batteryLevel;
@@ -83,6 +90,11 @@ public class Drone {
         this.direction = direction;
     }
 
+    /**
+     * Gets the current coordinates of the drone.
+     * 
+     * @return the current coordinates of the drone.
+     */
     public Coordinates getCoordinates() {
         return this.coordinates;
     }
