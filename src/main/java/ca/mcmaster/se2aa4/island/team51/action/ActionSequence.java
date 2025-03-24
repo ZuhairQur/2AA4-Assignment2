@@ -10,7 +10,7 @@ public class ActionSequence {
      * are: 25 fly, scan, turn right, 25 fly. This is the initial action sequence
      * given to the drone when it is first created.
      */
-    public void fillWithActions() {
+    public void generate() {
         this.directToMiddle();
         this.spiralSearch();
     }

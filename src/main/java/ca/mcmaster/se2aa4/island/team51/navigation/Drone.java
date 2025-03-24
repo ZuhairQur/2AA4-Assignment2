@@ -20,7 +20,7 @@ public class Drone {
         this.batteryLevel = batteryLevel;
         this.decision = new JSONObject();
         this.direction = Direction.E;
-        this.actionSequence.fillWithActions();
+        this.actionSequence.generate();
         this.coordinates = new Coordinates(1.0,1.0);
         this.detectedEmergencySite = false;
     }
@@ -54,8 +54,7 @@ public class Drone {
         this.decision = currentAction.execute(this);
 
         if (actionType == ActionType.FLY || actionType == ActionType.TURN) {
-            coordinates.updateCoords(getDirection());
-            System.out.print(coordinates.getCoordinates());
+            coordinates.updateCoords(this.direction);
         }
 
         return this.decision;
