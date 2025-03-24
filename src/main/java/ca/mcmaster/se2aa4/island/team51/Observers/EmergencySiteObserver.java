@@ -1,7 +1,12 @@
-package ca.mcmaster.se2aa4.island.team51;
+package ca.mcmaster.se2aa4.island.team51.Observers;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import ca.mcmaster.se2aa4.island.team51.Navigation.LocationType;
+import ca.mcmaster.se2aa4.island.team51.Navigation.Coordinates;
+import ca.mcmaster.se2aa4.island.team51.Navigation.Drone;
+import ca.mcmaster.se2aa4.island.team51.Navigation.Map;
 
 public class EmergencySiteObserver implements ResponseObserver {
     @Override

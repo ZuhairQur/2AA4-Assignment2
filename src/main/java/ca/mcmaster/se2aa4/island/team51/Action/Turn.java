@@ -2,8 +2,8 @@ package ca.mcmaster.se2aa4.island.team51.Action;
 
 import org.json.JSONObject;
 
-import ca.mcmaster.se2aa4.island.team51.Direction;
-import ca.mcmaster.se2aa4.island.team51.Drone;
+import ca.mcmaster.se2aa4.island.team51.Navigation.Direction;
+import ca.mcmaster.se2aa4.island.team51.Navigation.Drone;
 
 public class Turn implements Action {
     private final JSONObject instruction = new JSONObject();

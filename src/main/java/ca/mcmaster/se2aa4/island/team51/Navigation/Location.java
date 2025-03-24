@@ -1,4 +1,6 @@
-package ca.mcmaster.se2aa4.island.team51;
+package ca.mcmaster.se2aa4.island.team51.Navigation;
+
+import ca.mcmaster.se2aa4.island.team51.Navigation.LocationType;
 
 public class Location { 
     private String id; 

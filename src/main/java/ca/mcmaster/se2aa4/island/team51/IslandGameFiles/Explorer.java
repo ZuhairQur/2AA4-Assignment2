@@ -1,12 +1,19 @@
-package ca.mcmaster.se2aa4.island.team51;
+package ca.mcmaster.se2aa4.island.team51.IslandGameFiles;
 
 import java.io.StringReader;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.json.JSONObject;
-import org.json.JSONTokener; 
+import org.json.JSONTokener;
 
+import ca.mcmaster.se2aa4.island.team51.Navigation.Drone;
+import ca.mcmaster.se2aa4.island.team51.Navigation.Map;
+import ca.mcmaster.se2aa4.island.team51.Observers.CostObserver;
+import ca.mcmaster.se2aa4.island.team51.Observers.CreekObserver;
+import ca.mcmaster.se2aa4.island.team51.Observers.EmergencySiteObserver;
+import ca.mcmaster.se2aa4.island.team51.Observers.ResponseManager;
+import ca.mcmaster.se2aa4.island.team51.Observers.StatusObserver;
 import eu.ace_design.island.bot.IExplorerRaid; 
 
 public class Explorer implements IExplorerRaid {

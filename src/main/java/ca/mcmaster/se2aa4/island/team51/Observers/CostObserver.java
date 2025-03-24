@@ -1,8 +1,11 @@
-package ca.mcmaster.se2aa4.island.team51;
+package ca.mcmaster.se2aa4.island.team51.Observers;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.json.JSONObject;
+
+import ca.mcmaster.se2aa4.island.team51.Navigation.Drone;
+import ca.mcmaster.se2aa4.island.team51.Navigation.Map;
 
 public class CostObserver implements ResponseObserver {
     private static final Logger logger = LogManager.getLogger(CostObserver.class);

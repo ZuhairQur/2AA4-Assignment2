@@ -1,4 +1,4 @@
-package ca.mcmaster.se2aa4.island.team51;
+package ca.mcmaster.se2aa4.island.team51.Navigation;
 
 import java.util.HashMap;
 import java.util.List;
@@ -6,6 +6,8 @@ import java.util.stream.Collectors;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import ca.mcmaster.se2aa4.island.team51.Navigation.LocationType;
 
 public class Map {
     
