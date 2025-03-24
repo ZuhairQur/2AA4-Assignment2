@@ -55,7 +55,7 @@ public class Drone {
         this.decision = currentAction.execute(this);
 
         if (actionType == ActionType.FLY || actionType == ActionType.TURN) {
-            coordinates.updateCoordsFly(getDirection());
+            coordinates.updateCoords(getDirection());
             System.out.print(coordinates.getCoordinates());
         }
 
@@ -85,15 +85,26 @@ public class Drone {
         this.direction = direction;
     }
 
-    //public void updateMemory(JSONObject response) {
-    //    JsonParser.parseAcknowledgment(response, map, this);
-    //}
-    
     public Coordinates getCoordinates() {
         return this.coordinates;
     }
 
-    public Map getMap() {
-        return this.map;
+    public void addLocationToMap(String id, LocationType type){ 
+        if (!this.map.containsLocation(id, type)){
+            this.map.addLocation(new Coordinates(this.coordinates.getX(), this.coordinates.getY()), id, type);
+        }
     }
+
+    public String nearestCreekToEmergencySiteId() {
+        return this.map.nearestCreekToEmergencySite();
+    }
+
+    public String creekIds() {
+        return this.map.getCreekIds().toString();
+    }
+
+    public String emergencySiteIds() {
+        return this.map.getEmergencySiteIds().toString();
+    }
+    
 }

@@ -8,10 +8,9 @@ public class EmergencySiteObserver implements ResponseObserver {
     public void update(JSONObject response, Drone drone) {
         if (response.has("extras") && response.getJSONObject("extras").has("sites")) {
             JSONArray emergencySites = response.getJSONObject("extras").getJSONArray("sites");
-            Coordinates droneCoordinates = drone.getCoordinates();
             for (int i = 0; i < emergencySites.length(); i++) {
                 String siteId = emergencySites.getString(i);
-                drone.getMap().addLocation(new Coordinates(droneCoordinates.getX(), droneCoordinates.getY()), siteId, LocationType.EMERGENCY_SITE);
+                drone.addLocationToMap(siteId, LocationType.EMERGENCY_SITE);
             }
         }
     }

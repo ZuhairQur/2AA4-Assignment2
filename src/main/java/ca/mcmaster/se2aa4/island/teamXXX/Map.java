@@ -32,7 +32,7 @@ public class Map {
                 .collect(Collectors.toList());
     }
 
-    public List<String> getEmergencySiteId() {
+    public List<String> getEmergencySiteIds() {
         return emergencySiteLocations.values().stream()
                 .map(Location::getId)
                 .collect(Collectors.toList());
@@ -58,4 +58,16 @@ public class Map {
     public boolean discoveredEmergencySite() {
         return !emergencySiteLocations.isEmpty();
     }
+
+    public boolean containsLocation(String id, LocationType type) {
+        if (type == LocationType.CREEK) {
+            return creekLocations.values().stream()
+                    .anyMatch(location -> location.getId().equals(id));
+        } else if (type == LocationType.EMERGENCY_SITE) {
+            return emergencySiteLocations.values().stream()
+                    .anyMatch(location -> location.getId().equals(id));
+        }
+        return false;
+    }
+    
 }

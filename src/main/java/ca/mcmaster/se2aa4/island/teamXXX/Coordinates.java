@@ -20,7 +20,7 @@ public class Coordinates {
         coordList.add(y);
     }
 
-    public void updateCoordsFly(Direction direction) {
+    public void updateCoords(Direction direction) {
         this.direction = direction;
         if (direction == Direction.E || prevDirection == Direction.E) {
             x++;
@@ -64,14 +64,6 @@ public class Coordinates {
         if (obj == null || getClass() != obj.getClass()) return false;
         Coordinates that = (Coordinates) obj;
         return this.x.equals(that.x) && this.y.equals(that.y);
-    }
-
-    @Override
-    public int hashCode() {
-        int result = 17;
-        result = 31 * result + x.hashCode();
-        result = 31 * result + y.hashCode();
-        return result;
     }
 
     public double distance(Coordinates other) {

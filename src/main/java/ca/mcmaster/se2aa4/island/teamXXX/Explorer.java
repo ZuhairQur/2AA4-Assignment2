@@ -62,22 +62,17 @@ public class Explorer implements IExplorerRaid {
     public void acknowledgeResults(String s) {
         JSONObject response = new JSONObject(new JSONTokener(new StringReader(s)));
         responseManager.notifyObservers(response, drone);
-        // JsonParser parser = new JsonParser(List.of(
-        //     new CostJsonAdapter(),
-        //     new StatusJsonAdapter(),
-        //     new CreekJsonAdapter(),
-        //     new EmergencySiteJsonAdapter()
-        // ));
-
-        //parser.parseAcknowledgment(response, drone); 
     } 
 
     @Override
     public String deliverFinalReport() {
-        logger.info("Nearest creek: {}", drone.getMap().nearestCreekToEmergencySite());
-        logger.info("Creek locations: {}", drone.getMap().getCreekIds());
-        logger.info("Emergency sites: {}", drone.getMap().getEmergencySiteId());
-        return "no creek found";
+        logger.info("Nearest creek: {}", drone.nearestCreekToEmergencySiteId());
+        logger.info("Creeks: {}", drone.creekIds());
+        logger.info("Emergency sites: {}", drone.emergencySiteIds());
+        
+        return "Nearest creek: " + drone.nearestCreekToEmergencySiteId() + "\n" +
+                "Creeks: " + drone.creekIds() + "\n" +
+                "Emergency sites: " + drone.emergencySiteIds();
     }
 
 }
