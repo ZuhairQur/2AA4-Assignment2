@@ -8,7 +8,7 @@ public class CostObserver implements ResponseObserver {
     private static final Logger logger = LogManager.getLogger(CostObserver.class);
 
     @Override
-    public void update(JSONObject response, Drone drone) {
+    public void update(JSONObject response, Drone drone, Map map) {
         if (response.has("cost")) {
             int cost = response.getInt("cost");
             drone.updateBattery(cost);

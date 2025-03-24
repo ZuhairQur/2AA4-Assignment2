@@ -14,7 +14,6 @@ public class Drone {
     private ActionsQueue actionsQueue = new ActionsQueue();
     private Coordinates coordinates;
     private boolean detectedEmergencySite = false;
-    private Map map; 
 
 
     public Drone(Integer batteryLevel) {
@@ -23,7 +22,6 @@ public class Drone {
         this.direction = Direction.E;
         this.actionsQueue.fillWithActions();
         this.coordinates = new Coordinates(1.0,1.0);
-        this.map = new Map();
     }
 
 
@@ -36,14 +34,14 @@ public class Drone {
      *
      * @return A JSONObject containing the decision to execute.
      */
-    public JSONObject makeDecision() {
+    public JSONObject makeDecision(boolean discoveredEmergencySite) {
         this.decision.clear();
 
         if (batteryLevel <= 100) {
             return new Return().execute(this);
         }
 
-        if (map.discoveredEmergencySite() && !this.detectedEmergencySite) {
+        if (discoveredEmergencySite && !this.detectedEmergencySite) {
             this.actionsQueue.clear();
             this.actionsQueue.spiralSearch();
             this.detectedEmergencySite = true;
@@ -87,24 +85,6 @@ public class Drone {
 
     public Coordinates getCoordinates() {
         return this.coordinates;
-    }
-
-    public void addLocationToMap(String id, LocationType type){ 
-        if (!this.map.containsLocation(id, type)){
-            this.map.addLocation(new Coordinates(this.coordinates.getX(), this.coordinates.getY()), id, type);
-        }
-    }
-
-    public String nearestCreekToEmergencySiteId() {
-        return this.map.nearestCreekToEmergencySite();
-    }
-
-    public String creekIds() {
-        return this.map.getCreekIds().toString();
-    }
-
-    public String emergencySiteIds() {
-        return this.map.getEmergencySiteIds().toString();
     }
     
 }

@@ -19,11 +19,14 @@ public class Map {
 
     public void addLocation(Coordinates coordinates, String id, LocationType type) {
         Location location = new Location(id, type);
-        if (type == LocationType.CREEK) {
+        if (!containsLocation(id, type)) {
+            if (type == LocationType.CREEK) {
             creekLocations.put(coordinates, location);
-        } else if (type == LocationType.EMERGENCY_SITE) {
-            emergencySiteLocations.put(coordinates, location);
+            } else if (type == LocationType.EMERGENCY_SITE) {
+                emergencySiteLocations.put(coordinates, location);
+            }
         }
+       
     }
 
     public List<String> getCreekIds() {
@@ -69,5 +72,5 @@ public class Map {
         }
         return false;
     }
-    
+
 }
