@@ -1,4 +1,4 @@
-package ca.mcmaster.se2aa4.island.team51.IslandGameFiles;
+package ca.mcmaster.se2aa4.island.team51;
 
 import java.io.File;
 
