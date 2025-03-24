@@ -1,8 +1,8 @@
-package ca.mcmaster.se2aa4.island.teamXXX;
+package ca.mcmaster.se2aa4.island.team51;
 
-import org.json.JSONObject;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.json.JSONObject;
 
 public class StatusObserver implements ResponseObserver {
     private static final Logger logger = LogManager.getLogger(StatusObserver.class);

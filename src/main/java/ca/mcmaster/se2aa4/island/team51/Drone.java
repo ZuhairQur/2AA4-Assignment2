@@ -1,11 +1,11 @@
-package ca.mcmaster.se2aa4.island.teamXXX;
+package ca.mcmaster.se2aa4.island.team51;
 
 import org.json.JSONObject;
 
-import ca.mcmaster.se2aa4.island.teamXXX.Action.Action;
-import ca.mcmaster.se2aa4.island.teamXXX.Action.ActionSequence;
-import ca.mcmaster.se2aa4.island.teamXXX.Action.ActionType;
-import ca.mcmaster.se2aa4.island.teamXXX.Action.Return;
+import ca.mcmaster.se2aa4.island.team51.Action.Action;
+import ca.mcmaster.se2aa4.island.team51.Action.ActionSequence;
+import ca.mcmaster.se2aa4.island.team51.Action.ActionType;
+import ca.mcmaster.se2aa4.island.team51.Action.Return;
 
 public class Drone {
     private JSONObject decision;

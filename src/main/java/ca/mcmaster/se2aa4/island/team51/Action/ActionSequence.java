@@ -1,4 +1,4 @@
-package ca.mcmaster.se2aa4.island.teamXXX.Action;
+package ca.mcmaster.se2aa4.island.team51.Action;
 import java.util.LinkedList;
 import java.util.Queue;
 
