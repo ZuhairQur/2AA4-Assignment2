@@ -2,11 +2,18 @@ package ca.mcmaster.se2aa4.island.teamXXX.Action;
 
 import org.json.JSONObject;
 
+import ca.mcmaster.se2aa4.island.teamXXX.Direction;
 import ca.mcmaster.se2aa4.island.teamXXX.Drone;
 
-public abstract class Turn implements Action {
+public class Turn implements Action {
     private final JSONObject instruction = new JSONObject();
     private final JSONObject dir = new JSONObject();
+    private final TurnSide turnSide;
+
+
+    public Turn (TurnSide turnSide) {
+        this.turnSide = turnSide;
+    }
 
     /**
      * Instructs the drone to turn. The drone will not move
@@ -17,8 +24,61 @@ public abstract class Turn implements Action {
      * @return A JSONObject containing the instruction to send to the drone.
      */
     @Override
-    public abstract JSONObject execute(Drone drone);
+    public JSONObject execute(Drone drone) {
+        if (this.turnSide == TurnSide.LEFT) {
+            return this.turnLeft(drone);
+        }
 
+        return this.turnRight(drone);
+    }
+
+    private JSONObject turnLeft(Drone drone) {
+        Direction currentDirection = drone.getDirection();
+        JSONObject dir = new JSONObject();
+
+        if (currentDirection == Direction.E) {
+            dir = this.turnNorth();
+            drone.setDirection(Direction.N);
+        } else if (currentDirection == Direction.S) {
+            dir = this.turnEast();
+            drone.setDirection(Direction.E);
+        } else if (currentDirection == Direction.W) {
+            dir = this.turnSouth();
+            drone.setDirection(Direction.S);
+        } else if (currentDirection == Direction.N) {
+            dir = this.turnWest();
+            drone.setDirection(Direction.W);
+        }
+
+        return dir;
+    }
+
+    private JSONObject turnRight(Drone drone) {
+        Direction currentDirection = drone.getDirection();
+        JSONObject dir = new JSONObject();
+
+        if (currentDirection == Direction.E) {
+            dir = this.turnSouth();
+            drone.setDirection(Direction.S);
+        } else if (currentDirection == Direction.S) {
+            dir = this.turnWest();
+            drone.setDirection(Direction.W);
+        } else if (currentDirection ==  Direction.W) {
+            dir = this.turnNorth();
+            drone.setDirection(Direction.N);
+        } else if (currentDirection == Direction.N) {
+            dir = this.turnEast();
+            drone.setDirection(Direction.E);
+        }
+
+        return dir;
+    }
+
+    /**
+     * Gets the action type for the turn action.
+     *
+     * @return The action type for the turn action.
+     */
     @Override
     public ActionType getActionType() {
         return ActionType.TURN;
@@ -29,7 +89,7 @@ public abstract class Turn implements Action {
      * forward after turning, and will not perform any further actions until
      * it is given a new instruction.
      */
-     public JSONObject turnSouth() {
+     private JSONObject turnSouth() {
         this.instruction.clear();
         this.dir.clear();
 
@@ -46,7 +106,7 @@ public abstract class Turn implements Action {
      * forward after turning, and will not perform any further actions until
      * it is given a new instruction.
      */
-    public JSONObject turnWest() {
+    private JSONObject turnWest() {
         this.instruction.clear();
         this.dir.clear();
 
@@ -63,7 +123,7 @@ public abstract class Turn implements Action {
      * forward after turning, and will not perform any further actions until
      * it is given a new instruction.
      */
-    public JSONObject turnEast() {
+    private JSONObject turnEast() {
         this.instruction.clear();
         this.dir.clear();
 
@@ -80,7 +140,7 @@ public abstract class Turn implements Action {
      * forward after turning, and will not perform any further actions until
      * it is given a new instruction.
      */
-    public JSONObject turnNorth() {
+    private JSONObject turnNorth() {
         this.instruction.clear();
         this.dir.clear();
 

@@ -3,15 +3,15 @@ package ca.mcmaster.se2aa4.island.teamXXX;
 import org.json.JSONObject;
 
 import ca.mcmaster.se2aa4.island.teamXXX.Action.Action;
+import ca.mcmaster.se2aa4.island.teamXXX.Action.ActionSequence;
 import ca.mcmaster.se2aa4.island.teamXXX.Action.ActionType;
-import ca.mcmaster.se2aa4.island.teamXXX.Action.ActionsQueue;
 import ca.mcmaster.se2aa4.island.teamXXX.Action.Return;
 
 public class Drone {
     private JSONObject decision;
     private Direction direction;
     private Integer batteryLevel;
-    private ActionsQueue actionsQueue = new ActionsQueue();
+    private ActionSequence actionSequence = new ActionSequence();
     private Coordinates coordinates;
     private boolean detectedEmergencySite = false;
 
@@ -20,7 +20,7 @@ public class Drone {
         this.batteryLevel = batteryLevel;
         this.decision = new JSONObject();
         this.direction = Direction.E;
-        this.actionsQueue.fillWithActions();
+        this.actionSequence.fillWithActions();
         this.coordinates = new Coordinates(1.0,1.0);
     }
 
@@ -42,12 +42,12 @@ public class Drone {
         }
 
         if (discoveredEmergencySite && !this.detectedEmergencySite) {
-            this.actionsQueue.clear();
-            this.actionsQueue.spiralSearch();
+            this.actionSequence.clear();
+            this.actionSequence.spiralSearch();
             this.detectedEmergencySite = true;
         }
 
-        Action currentAction = this.actionsQueue.getNextAction();
+        Action currentAction = this.actionSequence.getNextAction();
         ActionType actionType = currentAction.getActionType();
 
         this.decision = currentAction.execute(this);

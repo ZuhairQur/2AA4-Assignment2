@@ -19,6 +19,11 @@ public class Scan implements Action {
         return instruction;
     }
 
+    /**
+     * Gets the action type for the scan action.
+     *
+     * @return The action type for the scan action.
+     */
     @Override
     public ActionType getActionType() {
         return ActionType.SCAN;

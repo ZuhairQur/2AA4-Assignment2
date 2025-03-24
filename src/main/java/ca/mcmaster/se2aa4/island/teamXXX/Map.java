@@ -27,8 +27,7 @@ public class Map {
             } else if (type == LocationType.EMERGENCY_SITE) {
                 emergencySiteLocations.put(coordinates, location);
             }
-        }
-       
+        }  
     }
 
     public List<String> getCreekIds() {
@@ -64,7 +63,7 @@ public class Map {
         return !emergencySiteLocations.isEmpty();
     }
 
-    public boolean containsLocation(String id, LocationType type) {
+    private boolean containsLocation(String id, LocationType type) {
         if (type == LocationType.CREEK) {
             return creekLocations.values().stream()
                     .anyMatch(location -> location.getId().equals(id));

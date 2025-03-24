@@ -22,6 +22,11 @@ public class Fly implements Action {
         return instruction;
     }
 
+    /**
+     * Returns the type of action this instance represents, which is "fly".
+     *
+     * @return The ActionType associated with this action.
+     */
     @Override
     public ActionType getActionType() {
         return ActionType.FLY;
