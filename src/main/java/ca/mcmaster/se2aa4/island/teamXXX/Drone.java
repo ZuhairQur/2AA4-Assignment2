@@ -1,5 +1,7 @@
 package ca.mcmaster.se2aa4.island.teamXXX;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.json.JSONObject;
 
 import ca.mcmaster.se2aa4.island.teamXXX.Action.Action;
@@ -15,7 +17,7 @@ public class Drone {
     private Coordinates coordinates;
     private boolean detectedEmergencySite = false;
     private Map map; 
-
+    private static final Logger logger = LogManager.getLogger(Drone.class);
 
     public Drone(Integer batteryLevel) {
         this.batteryLevel = batteryLevel;
@@ -95,5 +97,6 @@ public class Drone {
 
     public Map getMap() {
         return this.map;
+        
     }
 }

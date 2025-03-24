@@ -11,6 +11,8 @@ public class Map {
     
     private HashMap<Coordinates, Location> creekLocations;
     private HashMap<Coordinates, Location> emergencySiteLocations;
+    private static final Logger logger = LogManager.getLogger(Drone.class);
+
 
     public Map() {
         this.creekLocations = new HashMap<>();
@@ -20,9 +22,9 @@ public class Map {
     public void addLocation(Coordinates coordinates, String id, LocationType type) {
         Location location = new Location(id, type);
         if (type == LocationType.CREEK) {
-            creekLocations.put(coordinates, location);
+            this.creekLocations.put(coordinates, location);
         } else if (type == LocationType.EMERGENCY_SITE) {
-            emergencySiteLocations.put(coordinates, location);
+            this.emergencySiteLocations.put(coordinates, location);
         }
     }
 
