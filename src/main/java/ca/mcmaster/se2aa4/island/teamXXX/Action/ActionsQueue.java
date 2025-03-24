@@ -40,25 +40,6 @@ public class ActionsQueue {
 
     public void spiralSearch() {
 
-   
-
-        // this.queue.add(new Scan());
-        // this.queue.add(new TurnLeft());
-
-        // this.queue.add(new Scan());
-        // this.queue.add(new TurnLeft());
-
-        // this.queue.add(new Scan());
-        // this.queue.add(new TurnLeft());
-
-        // this.queue.add(new Scan());
-        // this.queue.add(new Fly());
-        // this.queue.add(new Scan());
-        // this.queue.add(new TurnLeft());
-
-        // this.queue.add(new Scan());
-        // this.queue.add(new TurnLeft());
-
         for (int i = 0; i < 30; i++) {
             for (int j = 0; j < 2*i; j++) {
                 this.queue.add(new Scan());
@@ -88,28 +69,6 @@ public class ActionsQueue {
 
             this.wideTurn();
         }
-
-        // for (int i = 0; i < 5; i++) {
-        //     for (int k = 0; k < 3; k++) {
-        //         for (int j = 0; j < i; j++) {
-        //             this.queue.add(new Scan());
-        //             this.queue.add(new Fly());
-        //         }
-
-        //         this.queue.add(new Scan());
-        //         this.queue.add(new TurnLeft());
-        //     }
-
-        //     for (int j = 0; j < this.spiralSize; j++) {
-        //         this.queue.add(new Scan());
-        //         this.queue.add(new Fly());
-        //     }
-
-        //     this.queue.add(new Scan());
-        //     this.queue.add(new Fly());
-        //     this.queue.add(new Scan());
-        //     this.queue.add(new TurnLeft());
-        // }
 
         this.queue.add(new Return());
     }

@@ -15,6 +15,7 @@ public class Explorer implements IExplorerRaid {
     private Integer batteryLevel; 
     private Drone drone;
     private ResponseManager responseManager;
+    private Map map = new Map(); 
 
     /**
      * Initializes the Exploration Command Center with the given information.
@@ -52,7 +53,7 @@ public class Explorer implements IExplorerRaid {
      */
     @Override
     public String takeDecision() {
-        JSONObject decision = drone.makeDecision();
+        JSONObject decision = drone.makeDecision(map.discoveredEmergencySite());
         logger.info("** Decision: {}",decision.toString());
         return decision.toString();
     }
@@ -60,15 +61,18 @@ public class Explorer implements IExplorerRaid {
     @Override
     public void acknowledgeResults(String s) {
         JSONObject response = new JSONObject(new JSONTokener(new StringReader(s)));
-        responseManager.notifyObservers(response, drone);
+        responseManager.notifyObservers(response, drone, map);
     } 
 
     @Override
     public String deliverFinalReport() {
-        logger.info("Nearest creek: {}", drone.getMap().nearestCreekToEmergencySite());
-        logger.info("Creek locations: {}", drone.getMap().getCreekIds());
-        logger.info("Emergency sites: {}", drone.getMap().getEmergencySiteId());
-        return "no creek found";
+        logger.info("Nearest creek: {}", map.nearestCreekToEmergencySite());
+        logger.info("Creeks: {}", map.getCreekIds());
+        logger.info("Emergency sites: {}", map.getEmergencySiteIds());
+        
+        return "Nearest creek: " + map.nearestCreekToEmergencySite() + "\n" +
+                "Creeks: " + map.getCreekIds() + "\n" +
+                "Emergency sites: " + map.getEmergencySiteIds();
     }
 
 }

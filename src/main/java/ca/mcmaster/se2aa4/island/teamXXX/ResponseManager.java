@@ -12,9 +12,9 @@ public class ResponseManager {
         this.responseObservers.add(responseObserver);
     }
 
-    public void notifyObservers(JSONObject response, Drone drone) {
+    public void notifyObservers(JSONObject response, Drone drone, Map map) {
         for (ResponseObserver observer : this.responseObservers) {
-            observer.update(response, drone);
+            observer.update(response, drone, map);
         }
     }
 

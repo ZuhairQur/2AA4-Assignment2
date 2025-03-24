@@ -1,7 +1,5 @@
 package ca.mcmaster.se2aa4.island.teamXXX;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.json.JSONObject;
 
 import ca.mcmaster.se2aa4.island.teamXXX.Action.Action;
@@ -16,8 +14,7 @@ public class Drone {
     private ActionsQueue actionsQueue = new ActionsQueue();
     private Coordinates coordinates;
     private boolean detectedEmergencySite = false;
-    private Map map; 
-    private static final Logger logger = LogManager.getLogger(Drone.class);
+
 
     public Drone(Integer batteryLevel) {
         this.batteryLevel = batteryLevel;
@@ -25,7 +22,6 @@ public class Drone {
         this.direction = Direction.E;
         this.actionsQueue.fillWithActions();
         this.coordinates = new Coordinates(1.0,1.0);
-        this.map = new Map();
     }
 
 
@@ -38,14 +34,14 @@ public class Drone {
      *
      * @return A JSONObject containing the decision to execute.
      */
-    public JSONObject makeDecision() {
+    public JSONObject makeDecision(boolean discoveredEmergencySite) {
         this.decision.clear();
 
         if (batteryLevel <= 100) {
             return new Return().execute(this);
         }
 
-        if (map.discoveredEmergencySite() && !this.detectedEmergencySite) {
+        if (discoveredEmergencySite && !this.detectedEmergencySite) {
             this.actionsQueue.clear();
             this.actionsQueue.spiralSearch();
             this.detectedEmergencySite = true;
@@ -57,7 +53,7 @@ public class Drone {
         this.decision = currentAction.execute(this);
 
         if (actionType == ActionType.FLY || actionType == ActionType.TURN) {
-            coordinates.updateCoordsFly(getDirection());
+            coordinates.updateCoords(getDirection());
             System.out.print(coordinates.getCoordinates());
         }
 
@@ -87,16 +83,8 @@ public class Drone {
         this.direction = direction;
     }
 
-    //public void updateMemory(JSONObject response) {
-    //    JsonParser.parseAcknowledgment(response, map, this);
-    //}
-    
     public Coordinates getCoordinates() {
         return this.coordinates;
     }
-
-    public Map getMap() {
-        return this.map;
-        
-    }
+    
 }
