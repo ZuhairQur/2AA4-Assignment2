@@ -45,11 +45,8 @@ public class Drone {
      * @return A JSONObject containing the decision to execute.
      */
     public JSONObject makeDecision(boolean discoveredEmergencySite) {
+        boolean withinBounds = true;
         this.decision.clear();
-
-        if (batteryLevel <= 100) {
-            return new Return().execute(this);
-        }
 
         if (discoveredEmergencySite && !this.detectedEmergencySite) {
             this.actionSequence.clear();
@@ -59,12 +56,16 @@ public class Drone {
 
         Action currentAction = this.actionSequence.getNextAction();
         ActionType actionType = currentAction.getActionType();
+        
+        if (actionType == ActionType.FLY || actionType == ActionType.TURN) {
+            withinBounds = coordinates.updateCoords(this.direction);
+        }
+
+        if (!withinBounds || batteryLevel <= 100) {
+            return new Return().execute(this);
+        }
 
         this.decision = currentAction.execute(this);
-
-        if (actionType == ActionType.FLY || actionType == ActionType.TURN) {
-            coordinates.updateCoords(this.direction);
-        }
 
         return this.decision;
     }

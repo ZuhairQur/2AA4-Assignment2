@@ -34,7 +34,7 @@ public class Coordinates {
      * 
      * @param direction the direction to update the coordinates with
      */
-    public void updateCoords(Direction direction) {
+    public boolean updateCoords(Direction direction) {
         this.direction = direction;
         if (direction == Direction.E || prevDirection == Direction.E) {
             x++;
@@ -49,10 +49,16 @@ public class Coordinates {
             y--;
         }
 
+        if (x < 1 || x > 51 || y < 1 || y > 52) {
+            return false;
+        }
+
         coordList.set(0, x);
         coordList.set(1, y);
 
         prevDirection = direction;
+
+        return true;
     }
 
     /**
