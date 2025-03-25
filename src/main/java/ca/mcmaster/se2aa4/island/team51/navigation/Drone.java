@@ -48,6 +48,7 @@ public class Drone {
         boolean withinBounds = true;
         this.decision.clear();
 
+        // Spiral emergency site when discovered
         if (discoveredEmergencySite && !this.detectedEmergencySite) {
             this.actionSequence.clear();
             this.actionSequence.spiralSearch();
@@ -61,7 +62,7 @@ public class Drone {
             withinBounds = coordinates.updateCoords(this.direction);
         }
 
-        if (!withinBounds || batteryLevel <= 100) {
+        if (!withinBounds || this.batteryLevel <= 100) {
             return new Return().execute(this);
         }
 
@@ -87,7 +88,7 @@ public class Drone {
      */
     public int updateBattery(int cost) {
         this.batteryLevel -= cost;
-        return batteryLevel;
+        return this.batteryLevel;
     }
 
     /**

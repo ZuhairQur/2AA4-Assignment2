@@ -95,9 +95,11 @@ public class Explorer implements IExplorerRaid {
      */
     @Override
     public String deliverFinalReport() {
+        logger.info("--------------------------------------------------------------------");
         logger.info("Nearest creek: {}", map.nearestCreekToEmergencySite());
         logger.info("Creeks: {}", map.getCreekIds());
         logger.info("Emergency sites: {}", map.getEmergencySiteIds());
+        logger.info("--------------------------------------------------------------------");
         
         return "Nearest creek: " + map.nearestCreekToEmergencySite() + "\n" +
                 "Creeks: " + map.getCreekIds() + "\n" +
