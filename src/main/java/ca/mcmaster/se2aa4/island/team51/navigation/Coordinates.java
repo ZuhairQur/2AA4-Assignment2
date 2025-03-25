@@ -29,10 +29,14 @@ public class Coordinates {
         coordList.add(y);
     }
 
+
     /**
-     * Updates the coordinates of the drone based on the given direction. If the given direction is the same as the previous direction, the coordinates are incremented/decremented accordingly. The coordinates are then updated in the coordList.
+     * Updates the coordinates of the drone based on the given direction. If the 
+     * new coordinates are within the map boundaries, the coordinates are updated 
+     * and true is returned. Otherwise, false is returned.
      * 
-     * @param direction the direction to update the coordinates with
+     * @param direction The direction to move the drone in.
+     * @return True if the coordinates were updated within map boundaries, false otherwise.
      */
     public boolean updateCoords(Direction direction) {
         this.direction = direction;
